@@ -12,6 +12,8 @@ public class ProductRequest {
     private Long harga;
     private Long IdKategori;
 
+    private Long jumlah;
+
     public ProductRequest() {
     }
 
@@ -37,5 +39,13 @@ public class ProductRequest {
 
     public void setIdKategori(Long idKategori) {
         IdKategori = idKategori;
+    }
+
+    public Long getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(Long jumlah) {
+        this.jumlah = jumlah;
     }
 }

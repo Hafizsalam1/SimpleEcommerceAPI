@@ -8,27 +8,29 @@ import java.util.Date;
 import java.util.Set;
 
 public class TransactionRequest {
-    private Date date;
-    private Set<Produk> produk;
+    private String date;
+    private Long idProduk;
     private Long totalHarga;
+
+    private Long jumlah;
 
     public TransactionRequest() {
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Set<Produk> getProduk() {
-        return produk;
+    public Long getIdProduk() {
+        return idProduk;
     }
 
-    public void setProduk(Set<Produk> produk) {
-        this.produk = produk;
+    public void setIdProduk(Long idProduk) {
+        this.idProduk = idProduk;
     }
 
     public Long getTotalHarga() {
@@ -37,5 +39,13 @@ public class TransactionRequest {
 
     public void setTotalHarga(Long totalHarga) {
         this.totalHarga = totalHarga;
+    }
+
+    public Long getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(Long jumlah) {
+        this.jumlah = jumlah;
     }
 }

@@ -18,23 +18,25 @@ public class Transaksi implements Serializable {
     @Column
     private Date date;
 
-    @ManyToMany(mappedBy = "transaksi")
-    private Set<Produk> produk;
+    @ManyToOne
+//    @JsonManagedReference
+    private Produk produk;
 
     @Column
     private Long totalHarga;
 
-//    @Column
-//    private Long jumlah;
+    @Column
+    private Long jumlah;
 
     public Transaksi() {
     }
 
-    public Transaksi(Long id, Date date, Set<Produk> produk, Long totalHarga) {
+    public Transaksi(Long id, Date date, Produk produk, Long totalHarga, Long jumlah) {
         this.id = id;
         this.date = date;
         this.produk = produk;
         this.totalHarga = totalHarga;
+        this.jumlah = jumlah;
     }
 
     public Long getId() {
@@ -53,11 +55,11 @@ public class Transaksi implements Serializable {
         this.date = date;
     }
 
-    public Set<Produk> getProduk() {
+    public Produk getProduk() {
         return produk;
     }
 
-    public void setProduk(Set<Produk> produk) {
+    public void setProduk(Produk produk) {
         this.produk = produk;
     }
 
@@ -67,5 +69,13 @@ public class Transaksi implements Serializable {
 
     public void setTotalHarga(Long totalHarga) {
         this.totalHarga = totalHarga;
+    }
+
+    public Long getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(Long jumlah) {
+        this.jumlah = jumlah;
     }
 }

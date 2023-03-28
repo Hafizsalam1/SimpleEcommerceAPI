@@ -18,10 +18,10 @@ public class Produk implements Serializable {
     @Column(name = "harga")
     private Long harga;
 
-    @ManyToMany
-    @JsonBackReference
-    @JoinTable(name = "produk_transaksi", joinColumns = @JoinColumn (name = "produk_id"), inverseJoinColumns = @JoinColumn(name = "transaksi_id"))
-    private Set<Transaksi> transaksi;
+//    @ManyToMany
+//    @JsonBackReference
+//    @JoinTable(name = "produk_transaksi", joinColumns = @JoinColumn (name = "produk_id"), inverseJoinColumns = @JoinColumn(name = "transaksi_id"))
+//    private Set<Transaksi> transaksi;
 
     @ManyToOne
 //    @JsonManagedReference
@@ -31,11 +31,10 @@ public class Produk implements Serializable {
     public Produk() {
     }
 
-    public Produk(Long id, String namaProduk, Long harga, Set<Transaksi> transaksi, Kategori kategori) {
+    public Produk(Long id, String namaProduk, Long harga, Kategori kategori) {
         this.id = id;
         this.namaProduk = namaProduk;
         this.harga = harga;
-        this.transaksi = transaksi;
         this.kategori = kategori;
     }
 
@@ -61,14 +60,6 @@ public class Produk implements Serializable {
 
     public void setHarga(Long harga) {
         this.harga = harga;
-    }
-
-    public Set<Transaksi> getTransaksi() {
-        return transaksi;
-    }
-
-    public void setTransaksi(Set<Transaksi> transaksi) {
-        this.transaksi = transaksi;
     }
 
     public Kategori getKategori() {

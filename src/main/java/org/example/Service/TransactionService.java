@@ -25,18 +25,15 @@ public class TransactionService implements IService<Transaksi> {
     @Override
     public Transaksi save(Transaksi transaksi) throws Exception {
         try {
-            Set<Produk> produks = transaksi.getProduk();
+            Produk produk = transaksi.getProduk();
+            Long id = produk.getId();
+            Produk produk1 = produkRepository.findById(id).get();
+            produk.setNamaProduk(produk1.getNamaProduk());
+            produk.setHarga(produk1.getHarga());
+            produk.setKategori(produk1.getKategori());
             Long harga = 0L;
-            for (Produk pro:produks) {
-                Long id = pro.getId();
-                Optional<Produk> produk = produkRepository.findById(id);
-                harga = harga + produk.get().getHarga();
-                pro.setNamaProduk(produk.get().getNamaProduk());
-                pro.setKategori(produk.get().getKategori());
-                pro.setHarga(produk.get().getHarga());
-            }
+            harga = produk.getHarga()* transaksi.getJumlah();
             transaksi.setTotalHarga(harga);
-
             return transactionRepository.save(transaksi);
         }
         catch (Exception e){
