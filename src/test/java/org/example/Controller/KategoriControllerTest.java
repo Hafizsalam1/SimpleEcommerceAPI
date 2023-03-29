@@ -27,8 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
+
 @WebMvcTest
 public class KategoriControllerTest {
 
@@ -59,18 +58,25 @@ public class KategoriControllerTest {
                 .andExpect((ResultMatcher) jsonPath("$.namaKategori", is(kategori.getNamaKategori())))
                 .andExpect((ResultMatcher) jsonPath("$.deskripsi", is(kategori.getDeskripsi())));
 
-
-
-
-
-//        when(kategoriRepository.findById(1L)).thenReturn(Optional.of(new Kategori(1L, "Pakaian", "Baju, celana, dll")));
-//
-//        Optional<Kategori> result = kategoriService.findById(1L);
-//        assertEquals(result.get().getId(), Long.valueOf(1L));
-//        assertEquals(result.get().getNamaKategori(), "Pakaian");
-//        assertEquals(result.get().getDeskripsi(), "Baju, celana, dll");
-
     }
+
+//    public void testFindById() throws Exception {
+//
+//        Long id = 1L;
+//
+//        Kategori kategori = Kategori.builder()
+//                .namaKategori("Pakaian")
+//                .deskripsi("Baju, celana, dll")
+//                .build();
+//        given(kategoriService.findById(id)).willReturn(Optional.of(kategori));
+//
+//        ResultActions response = mockMvc.perform(get("/category/{id}", id));
+//        response.andExpect(status().isOk())
+//                .andDo(print())
+//                .andExpect((ResultMatcher) jsonPath("$.namaKategori", is(kategori.getNamaKategori())))
+//                .andExpect((ResultMatcher) jsonPath("$.deskripsi", is(kategori.getDeskripsi())));
+//
+//    }
 
 
 
