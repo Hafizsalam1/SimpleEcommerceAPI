@@ -54,17 +54,7 @@ public class TransactionDetailController {
     @GetMapping("/daily")
     public ResponseEntity laporanHarian(@Valid String date) throws Exception{
 
-        Iterable<DetilTransaksi> detilTransaksi = detilTransaksiService.laporanHarian(org.example.Util.generateDate.generate(date));
-        Set<DetilTransaksi>detilTransaksis = new HashSet<>();
-        Long totalHarian = 0L;
-        for (DetilTransaksi det:detilTransaksi)
-              {
-                  detilTransaksis.add(det);
-                  totalHarian = totalHarian+ det.getGrandTotal();
-        }
-        LaporanHarianRequest laporanHarianRequest = new LaporanHarianRequest();
-        laporanHarianRequest.setTotalHarian(totalHarian);
-        laporanHarianRequest.setDetilTransaksi(detilTransaksis);
+        LaporanHarianRequest laporanHarianRequest = detilTransaksiService.laporanHarian(org.example.Util.generateDate.generate(date));
 
         return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<LaporanHarianRequest>("Get Laporan Harian succeed", laporanHarianRequest));
     }
@@ -72,17 +62,7 @@ public class TransactionDetailController {
     @GetMapping("/monthly")
     public ResponseEntity laporanBulanan(@Valid Integer month, Integer year) throws Exception{
 
-//        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        Set<DetilTransaksi>detilTransaksis = detilTransaksiService.laporanBulanan(month, year);
-        Long totalBulanan = 0L;
-        for (DetilTransaksi det:detilTransaksis)
-        {
-            detilTransaksis.add(det);
-            totalBulanan = totalBulanan+ det.getGrandTotal();
-        }
-        LaporanBulananRequest laporanBulananRequest = new LaporanBulananRequest();
-        laporanBulananRequest.setTotalBulanan(totalBulanan);
-        laporanBulananRequest.setDetilTransaksi(detilTransaksis);
+        LaporanBulananRequest laporanBulananRequest = detilTransaksiService.laporanBulanan(month, year);
 
         return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<LaporanBulananRequest>("Get Laporan Bulanan succeed", laporanBulananRequest));
     }

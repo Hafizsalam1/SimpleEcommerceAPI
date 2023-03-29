@@ -1,9 +1,11 @@
 package org.example.Model.Entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.io.Serializable;
-
+@Builder
 @Entity
 @Table(name = "kategori")
 public class Kategori implements Serializable {
@@ -24,6 +26,9 @@ public class Kategori implements Serializable {
         this.namaKategori = namaKategori;
         this.deskripsi = deskripsi;
     }
+
+
+
 
     public Long getId() {
         return id;
