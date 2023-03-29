@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
@@ -60,23 +62,23 @@ public class KategoriControllerTest {
 
     }
 
-//    public void testFindById() throws Exception {
-//
-//        Long id = 1L;
-//
-//        Kategori kategori = Kategori.builder()
-//                .namaKategori("Pakaian")
-//                .deskripsi("Baju, celana, dll")
-//                .build();
-//        given(kategoriService.findById(id)).willReturn(Optional.of(kategori));
-//
-//        ResultActions response = mockMvc.perform(get("/category/{id}", id));
-//        response.andExpect(status().isOk())
-//                .andDo(print())
-//                .andExpect((ResultMatcher) jsonPath("$.namaKategori", is(kategori.getNamaKategori())))
-//                .andExpect((ResultMatcher) jsonPath("$.deskripsi", is(kategori.getDeskripsi())));
-//
-//    }
+
+    @Test
+    public void findAll() throws Exception {
+
+        List<Kategori> kategoriList = new ArrayList<>();
+        kategoriList.add(Kategori.builder().namaKategori("baju").deskripsi("pakaian").build());
+        given(kategoriService.findAll()).willReturn(kategoriList);
+
+        ResultActions response = mockMvc.perform(get("/category"));
+
+        // then - verify the output
+        response.andExpect(status().isOk())
+                .andDo(print())
+                .andExpect((ResultMatcher) jsonPath("$.size()",
+                        is(kategoriList.size())));
+
+    }
 
 
 
