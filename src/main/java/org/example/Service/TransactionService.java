@@ -1,5 +1,7 @@
 package org.example.Service;
 
+import jakarta.transaction.Transactional;
+import org.example.Model.Entity.DetilTransaksi;
 import org.example.Model.Entity.Produk;
 import org.example.Model.Entity.Transaksi;
 import org.example.Repository.ProdukRepository;
@@ -13,6 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Transactional
 public class TransactionService implements IService<Transaksi> {
 
     @Autowired
@@ -34,6 +37,17 @@ public class TransactionService implements IService<Transaksi> {
             Long harga = 0L;
             harga = produk.getHarga()* transaksi.getJumlah();
             transaksi.setTotalHarga(harga);
+            transaksi.setProduk(produk);
+            DetilTransaksi detilTransaksi = transaksi.getDetilTransaksi();
+            Long grandTotal = detilTransaksi.getGrandTotal();
+            detilTransaksi.setGrandTotal(grandTotal+ transaksi.getTotalHarga());
+            transaksi.setDetilTransaksi(detilTransaksi);
+
+
+
+
+
+
             return transactionRepository.save(transaksi);
         }
         catch (Exception e){
@@ -61,16 +75,43 @@ public class TransactionService implements IService<Transaksi> {
 
     @Override
     public Optional<Transaksi> findById(Long id) throws Exception {
-        return Optional.empty();
-    }
+        try{Optional<Transaksi> transaksi = transactionRepository.findById(id);
+            if (transaksi.isEmpty()) {
+                throw new RuntimeException("transaction not found");
+            }
+            return transaksi;
+        }
+        catch (Exception e){
+            throw new RuntimeException(e);
+        }    }
 
     @Override
-    public Transaksi update(Transaksi params, Long id) throws Exception {
-        return null;
+    public Transaksi update(Transaksi transaksi, Long id) throws Exception {
+        try{
+            Optional<Transaksi>transaksi1 = transactionRepository.findById(id);
+            if(transaksi1.isEmpty()){
+                throw new RuntimeException("transaction not found");
+            }
+            transaksi.setId(id);
+            return transactionRepository.save(transaksi);
+        }
+        catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void deleteById(Long id) throws Exception {
+        try{
+            Optional<Transaksi>transaksi= transactionRepository.findById(id);
+            if(transaksi.isEmpty()){
+                throw new RuntimeException("transaction not found");
+            }
+            transactionRepository.deleteById(id);
+        }
+        catch (Exception e){
+            throw new RuntimeException(e);
+        }
 
     }
 

@@ -1,5 +1,6 @@
 package org.example.Service;
 
+import jakarta.transaction.Transactional;
 import org.example.Model.Entity.Produk;
 import org.example.Repository.ProdukRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ProdukService implements IService<Produk>{
 
     @Autowired
@@ -49,7 +51,7 @@ public class ProdukService implements IService<Produk>{
     public Optional<Produk> findById(Long id) throws Exception {
         try{Optional<Produk> produk = produkRepository.findById(id);
             if (produk.isEmpty()) {
-                throw new RuntimeException("course not found");
+                throw new RuntimeException("product not found");
             }
             return produk;
         }

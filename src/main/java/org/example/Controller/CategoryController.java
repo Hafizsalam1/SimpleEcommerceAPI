@@ -49,6 +49,21 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<Optional<Kategori>>("Get by id Succeed", kategori));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteById(@PathVariable Long id) throws Exception {
+        Optional<Kategori> kategori = kategoriService.findById(id);
+        kategoriService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<Optional<Kategori>>("Delete Succeed",kategori));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateById(@Valid KategoriRequest kategoriRequest, @PathVariable Long id) throws Exception {
+        Kategori kategori = modelMapper.map(kategoriRequest, Kategori.class);
+        kategori.setId(id);
+        kategoriService.update(kategori, id);
+        return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<Kategori>("Update Succeed",kategori));
+    }
+
 
 
 }

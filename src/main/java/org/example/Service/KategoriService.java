@@ -1,5 +1,6 @@
 package org.example.Service;
 
+import jakarta.transaction.Transactional;
 import org.example.Model.Entity.Kategori;
 import org.example.Model.Entity.Produk;
 import org.example.Repository.KategoriRepository;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class KategoriService implements IService<Kategori>{
 
     @Autowired

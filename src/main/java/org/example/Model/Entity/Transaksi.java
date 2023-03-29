@@ -15,8 +15,8 @@ public class Transaksi implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
-    private Date date;
+//    @Column
+//    private Date date;
 
     @ManyToOne
 //    @JsonManagedReference
@@ -28,15 +28,19 @@ public class Transaksi implements Serializable {
     @Column
     private Long jumlah;
 
+    @ManyToOne
+    @JsonBackReference
+    private DetilTransaksi detilTransaksi;
+
     public Transaksi() {
     }
 
-    public Transaksi(Long id, Date date, Produk produk, Long totalHarga, Long jumlah) {
+    public Transaksi(Long id, Produk produk, Long totalHarga, Long jumlah, DetilTransaksi detilTransaksi) {
         this.id = id;
-        this.date = date;
         this.produk = produk;
         this.totalHarga = totalHarga;
         this.jumlah = jumlah;
+        this.detilTransaksi = detilTransaksi;
     }
 
     public Long getId() {
@@ -45,14 +49,6 @@ public class Transaksi implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public Produk getProduk() {
@@ -77,5 +73,13 @@ public class Transaksi implements Serializable {
 
     public void setJumlah(Long jumlah) {
         this.jumlah = jumlah;
+    }
+
+    public DetilTransaksi getDetilTransaksi() {
+        return detilTransaksi;
+    }
+
+    public void setDetilTransaksi(DetilTransaksi detilTransaksi) {
+        this.detilTransaksi = detilTransaksi;
     }
 }
