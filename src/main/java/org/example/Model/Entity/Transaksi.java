@@ -23,10 +23,10 @@ public class Transaksi implements Serializable {
     private Produk produk;
 
     @Column
-    private Long totalHarga;
+    private Long jumlah;
 
     @Column
-    private Long jumlah;
+    private Long subTotal;
 
     @ManyToOne
     @JsonBackReference
@@ -35,10 +35,10 @@ public class Transaksi implements Serializable {
     public Transaksi() {
     }
 
-    public Transaksi(Long id, Produk produk, Long totalHarga, Long jumlah, DetilTransaksi detilTransaksi) {
+    public Transaksi(Long id, Produk produk, Long subTotal, Long jumlah, DetilTransaksi detilTransaksi) {
         this.id = id;
         this.produk = produk;
-        this.totalHarga = totalHarga;
+        this.subTotal = subTotal;
         this.jumlah = jumlah;
         this.detilTransaksi = detilTransaksi;
     }
@@ -59,12 +59,12 @@ public class Transaksi implements Serializable {
         this.produk = produk;
     }
 
-    public Long getTotalHarga() {
-        return totalHarga;
+    public Long getSubTotal() {
+        return subTotal;
     }
 
-    public void setTotalHarga(Long totalHarga) {
-        this.totalHarga = totalHarga;
+    public void setSubTotal(Long subTotal) {
+        this.subTotal = subTotal;
     }
 
     public Long getJumlah() {

@@ -10,9 +10,10 @@ import java.util.Set;
 
 public class TransactionRequest {
     private Long idProduk;
-    private Long totalHarga;
 
     private Long jumlah;
+
+    private Long subTotal;
 
     private Long IdDetilTransaksi;
 
@@ -27,12 +28,12 @@ public class TransactionRequest {
         this.idProduk = idProduk;
     }
 
-    public Long getTotalHarga() {
-        return totalHarga;
+    public Long getSubTotal() {
+        return subTotal;
     }
 
-    public void setTotalHarga(Long totalHarga) {
-        this.totalHarga = totalHarga;
+    public void setSubTotal(Long subTotal) {
+        this.subTotal = subTotal;
     }
 
     public Long getJumlah() {

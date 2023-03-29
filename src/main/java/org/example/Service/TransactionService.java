@@ -36,11 +36,11 @@ public class TransactionService implements IService<Transaksi> {
             produk.setKategori(produk1.getKategori());
             Long harga = 0L;
             harga = produk.getHarga()* transaksi.getJumlah();
-            transaksi.setTotalHarga(harga);
+            transaksi.setSubTotal(harga);
             transaksi.setProduk(produk);
             DetilTransaksi detilTransaksi = transaksi.getDetilTransaksi();
             Long grandTotal = detilTransaksi.getGrandTotal();
-            detilTransaksi.setGrandTotal(grandTotal+ transaksi.getTotalHarga());
+            detilTransaksi.setGrandTotal(grandTotal+ transaksi.getSubTotal());
             transaksi.setDetilTransaksi(detilTransaksi);
 
 
